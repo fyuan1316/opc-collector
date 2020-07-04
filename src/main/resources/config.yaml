@@ -1,0 +1,15 @@
+source:
+  from: local
+  local:
+    csvpath: "src/main/resources/Water_demo_dataset.csv"
+    # read number of records per second
+    rate: "1"
+  remote:
+    url: "opc://xxx"
+
+sink:
+  to: kafka
+  kafka:
+    brokerlist: localhost:6667
+    topic: test
+    msgspliter: ","

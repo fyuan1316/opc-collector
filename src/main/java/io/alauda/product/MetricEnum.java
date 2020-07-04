@@ -1,0 +1,38 @@
+package io.alauda.product;
+
+public enum MetricEnum {
+    Timestamp,
+    WW_supply_flow,
+    WW_ammonia_measurement,
+    WW_Secondary_Sediment_Flow,
+    WW_effluent_flow_measurement_,
+    WW_effluent_recirculation_flow_measurment,
+    WW_dry_substance_measurement,
+    WW_sec_Sediment_dry_substance_measurement,
+    WW_effluent_jack_Flow,
+    WW_section_1_air_flow_measurement,
+    WW_section_2_air_flow_measurement,
+    WW_section_3_air_flow_measurement,
+    WW_Settled_Solids,
+    WW_Precipitate_mm,
+    WW_nitrate_measurement_BLT_4_comp__3,
+    WW_nitrate_measurement_BLT_4_comp__5_of_9,
+    WW_nitrate_measurement_BLT_4_comp__6_of_10,
+    WW_nitrate_measurement_Before_Aeration,
+    WW_Aeration_Point_BLT_4_comp__10_,
+    WW_Aeration_Point_BLT_4_comp__3,
+    WW_Aeration_Point_BLT_4_comp__4,
+    WW_Aeration_Point_BLT_4_comp__5_,
+    WW_Aeration_Point_BLT_4_comp__6,
+    WW_Aeration_Point_BLT_4_comp__7,
+    WW_Aeration_Point_BLT_4_comp__8_,
+    WW_Aeration_Point_BLT_4_comp__9,
+    WW_Temperature_Measurement_BLT_4,
+    WW_Turbid_Measurement,
+    WW_Oxygen_Measurement_BLT_4_comp__10,
+    WW_Oxygen_Measurement_BLT_4_comp__4,
+    WW_Oxygen_Measurement_BLT_4_comp__6,
+    WW_Oxygen_Measurement_BLT_4_comp__8,
+    WW_Oxygen_Measurement__Before_Aeration_Section_2_
+
+}
