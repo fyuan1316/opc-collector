@@ -50,7 +50,7 @@ public class LocalCSVProducer implements Producer<MetricData> {
             if (cunter % 100 == 0) {
                 System.out.printf("loaded %d records\n", cunter);
             }
-            metric = parser.convert(record);
+            metric = parser.convertAll(record);
 //            System.out.println(metric);
 
             metrics.add(metric);

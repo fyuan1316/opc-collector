@@ -1,15 +1,15 @@
 package io.alauda;
 
 import io.alauda.config.Config;
-import io.alauda.config.Local;
-import io.alauda.consumer.KafkaConsumer;
 import io.alauda.definition.Consumer;
 import io.alauda.definition.Producer;
 import io.alauda.definition.Product;
-import io.alauda.producer.local.LocalCSVProducer;
 import io.alauda.product.MetricData;
 
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.SynchronousQueue;
 
 public class Main {
 
