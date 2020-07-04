@@ -4,7 +4,8 @@ import lombok.Data;
 
 public @Data
 class Config {
-
+    // 是否用户指定的配置文件, true 为用户指定.
+    private boolean custom ;
     private Source source;
     private Sink sink;
 

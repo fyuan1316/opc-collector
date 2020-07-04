@@ -7,14 +7,17 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class Option {
     CommandLine cl;
     private String fallbackConfigPath = "src/main/resources/config.yaml";
+    String pathToConfig;
+    boolean isCustom;
 
-    public String init(String[] args) {
+    public InputStream init(String[] args) throws FileNotFoundException {
         Options opts = new Options();
 //        opts.addOption("h", false, "");
 //        opts.addOption("source", true, "");
@@ -27,31 +30,33 @@ public class Option {
             System.err.printf("parse cli args error:%s\n", e.getStackTrace());
             System.exit(1);
         }
-        if (cl.getOptions().length == 0) {
+        InputStream in = null;
+        if (cl.getOptions().length == 0 || !cl.hasOption("config")) {
             System.err.println("config yaml file not given, will use default settings.");
-            return fallbackConfigPath;
+            pathToConfig = fallbackConfigPath;
+            in = FileUtil.getResource(pathToConfig, true);
+            isCustom = false;
         } else {
-            if (!cl.hasOption("config")) {
-                System.err.println("config yaml file not given, will use default settings.");
-                return fallbackConfigPath;
-            } else {
-                return cl.getOptionValue("config");
-            }
+            pathToConfig = cl.getOptionValue("config");
+            in = FileUtil.getResource(pathToConfig, false);
+            isCustom = true;
         }
+        return in;
     }
 
     public Config parse(String[] args) {
-        String pathToConfig = init(args);
-        Yaml yaml = new Yaml();
         InputStream in = null;
+
         try {
-            in = new FileInputStream(pathToConfig);
+            in = init(args);
         } catch (FileNotFoundException e) {
             System.err.printf("config file not found: %s", pathToConfig);
             System.exit(1);
         }
-        Config config = yaml.loadAs(in, Config.class);
 
+        Yaml yaml = new Yaml();
+        Config config = yaml.loadAs(in, Config.class);
+        config.setCustom(isCustom);
         return config;
     }
 

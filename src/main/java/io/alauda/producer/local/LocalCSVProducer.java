@@ -1,5 +1,6 @@
 package io.alauda.producer.local;
 
+import io.alauda.FileUtil;
 import io.alauda.config.Config;
 import io.alauda.definition.Producer;
 import io.alauda.definition.Product;
@@ -7,9 +8,7 @@ import io.alauda.product.MetricData;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 
 public class LocalCSVProducer implements Producer<MetricData> {
@@ -40,9 +39,20 @@ public class LocalCSVProducer implements Producer<MetricData> {
         metrics = new ArrayList<MetricData>();
         int cunter = 0;
         Parser parser = new Parser();
-//        Source source = this.config.getSource();
+        if (null == this.config.getSource().getLocal().getCsvpath()
+                || "".equals(this.config.getSource().getLocal().getCsvpath())) {
+            System.err.printf("Csv file  not found, please set it in config.yaml");
+            System.exit(1);
 
-        Reader in = new FileReader(this.config.getSource().getLocal().getCsvpath());
+        }
+
+        InputStream is = null;
+        if (this.config.isCustom()) {
+            is = FileUtil.getResource(this.config.getSource().getLocal().getCsvpath(), false);
+        } else {
+            is = FileUtil.getResource(this.config.getSource().getLocal().getCsvpath(), true);
+        }
+        Reader in = new InputStreamReader(is);
         Iterable<CSVRecord> records = CSVFormat.EXCEL.withHeader().parse(in);
         MetricData metric;
         for (CSVRecord record : records) {
