@@ -1,10 +1,7 @@
 package io.alauda;
 
 import io.alauda.config.Config;
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.*;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileNotFoundException;
@@ -23,9 +20,14 @@ public class Option {
 //        opts.addOption("source", true, "");
         opts.addOption("config", true, "path to yaml config file");
         BasicParser parser = new BasicParser();
-
+        HelpFormatter hf = new HelpFormatter();
+        hf.setWidth(110);
         try {
             cl = parser.parse(opts, args);
+            if (cl.hasOption('h')) {
+                // 打印使用帮助
+                hf.printHelp("opc-client", opts, true);
+            }
         } catch (ParseException e) {
             System.err.printf("parse cli args error:%s\n", e.getStackTrace());
             System.exit(1);
@@ -57,6 +59,11 @@ public class Option {
         Yaml yaml = new Yaml();
         Config config = yaml.loadAs(in, Config.class);
         config.setCustom(isCustom);
+        if (null == config.getRun()) {
+            System.err.printf("run settings not found in config file: %s\n", pathToConfig);
+            System.exit(1);
+        }
+
         return config;
     }
 

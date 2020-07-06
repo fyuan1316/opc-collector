@@ -27,8 +27,11 @@ public class Main {
 //        executorService.execute(new io.alauda.consumer.Worker<Long>(consumer, queue));
         executorService.execute(new io.alauda.producer.Worker<MetricData>(producer, queue));
         executorService.execute(new io.alauda.consumer.Worker<MetricData>(consumer, queue));
+
+        long duration = config.getRun().getDuration() * 60 * 1000;
+        System.out.printf("shutdown after %d minutes\n", duration);
         try {
-            Thread.sleep(5 * 60 * 1000);
+            Thread.sleep(duration);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

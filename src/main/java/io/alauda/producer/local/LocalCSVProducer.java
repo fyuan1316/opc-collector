@@ -8,10 +8,14 @@ import io.alauda.product.MetricData;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 
 public class LocalCSVProducer implements Producer<MetricData> {
+    //    private Logger logger = Logger.getLogger(LocalCSVProducer.class.toString());
     private Config config;
     private int recordPointer = 0;
     private int metricSize = 0;
@@ -32,7 +36,19 @@ public class LocalCSVProducer implements Producer<MetricData> {
         if (metrics == null) {
             this.loadCsvData();
         }
-        System.out.println("");
+        this.info();
+    }
+
+    private void info() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("------\n");
+        sb.append("local csv generator\n");
+        sb.append(String.format("records: %s\n", this.metricSize));
+        if (metrics.size() > 0) {
+            sb.append(String.format("example: %s\n", metrics.get(0)));
+        }
+        System.out.println(sb);
+        System.out.println("------");
     }
 
     private void loadCsvData() throws IOException {
@@ -58,7 +74,7 @@ public class LocalCSVProducer implements Producer<MetricData> {
         for (CSVRecord record : records) {
             cunter++;
             if (cunter % 100 == 0) {
-                System.out.printf("loaded %d records\n", cunter);
+                System.out.printf(String.format("loaded %d records\n", cunter));
             }
             metric = parser.convertAll(record);
 //            System.out.println(metric);

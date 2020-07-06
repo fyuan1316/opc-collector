@@ -2,7 +2,7 @@ source:
   from: local
   local:
     csvpath: "src/main/resources/Water_demo_dataset.csv"
-    # read number of records per second
+    # read number of records per second, not take effect right now
     rate: "1"
   remote:
     url: "opc://xxx"
@@ -13,3 +13,15 @@ sink:
     brokerlist: localhost:6667
     topic: test
     msgspliter: ","
+    sasl_enable: true
+    sasl_username:  kafka
+    sasl_passwd: "kafka@Tbds.com"
+    protocol: SASL_PLAINTEXT
+    sasl_mechanism: PLAIN
+    key_serializer: "org.apache.kafka.common.serialization.StringSerializer"
+    value_serializer: "org.apache.kafka.common.serialization.StringSerializer"
+run:
+  loglevel: info
+  # execute duration (minute)
+  duration: 120
+
