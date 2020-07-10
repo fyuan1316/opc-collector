@@ -13,6 +13,7 @@
         </excludes>
       </resource>
     </resources>
+    <finalName>opc-data-collector</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -44,7 +45,7 @@
               </filters>
               <transformers>
                 <transformer>
-                  <mainClass>io.alauda.consumer.TestKafakWrite</mainClass>
+                  <mainClass>io.alauda.Main</mainClass>
                 </transformer>
                 <transformer>
                   <resource>src/main/resources/config.yaml</resource>
@@ -71,18 +72,6 @@
         <exclusion>
           <artifactId>hamcrest-core</artifactId>
           <groupId>org.hamcrest</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>logback-core</artifactId>
-          <groupId>ch.qos.logback</groupId>
         </exclusion>
       </exclusions>
     </dependency>

@@ -73,6 +73,7 @@
 
     </dependencies>
     <build>
+        <finalName>opc-data-collector</finalName>
         <!-- Normally this should be avoided, but allows keeping the log4j.properties in the same folder as the rest -->
         <resources>
             <resource>
@@ -119,11 +120,13 @@
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>io.alauda.Main</mainClass>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                                     <resource>src/main/resources/config.yaml</resource>
                                     <file>src/main/resources/config.yaml</file>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                                     <resource>src/main/resources/Water_demo_dataset.csv</resource>
                                     <file>src/main/resources/Water_demo_dataset.csv</file>
                                 </transformer>
