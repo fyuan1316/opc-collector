@@ -21,6 +21,21 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- open scada 相关jar 开始-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.50</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openscada.utgard/org.openscada.opc.lib -->
+        <dependency>
+            <groupId>org.openscada.utgard</groupId>
+            <artifactId>org.openscada.opc.lib</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <!-- open scada 相关jar 结束-->
+
         <!-- Below dependencies are only needed for the samples -->
         <dependency>
             <groupId>org.slf4j</groupId>
